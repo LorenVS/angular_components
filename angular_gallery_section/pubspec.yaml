@@ -7,12 +7,12 @@ environment:
 dependencies:
   analyzer: ^5.10.0
   ngdart: ^8.0.0-dev.1
-  ngcomponents: 
+  ngcomponents:
     path: ../ngcomponents
   angular_gallery:
     path: ../angular_gallery
-  build: ^2.1.1
-  build_config: ^1.0.0
+  build:
+  build_config:
   glob: ^2.0.2
   markdown: ^7.0.2
   mustache_template: ^2.0.0

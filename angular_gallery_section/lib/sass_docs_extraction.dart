@@ -55,9 +55,9 @@ Future<SassDocInfo> extractSassDocs(
 ///
 /// Skips arguments when their names starts with an underscore.
 SassCallableInfo _extractCallable(CallableDeclaration callable) {
-  final args = callable.arguments.arguments
+  final args = callable.parameters.parameters
       .map((arg) => SassArgumentInfo(arg.name, arg.defaultValue.toString()));
-  var restArg = callable.arguments.restArgument;
+  var restArg = callable.parameters.restParameter;
   restArg = restArg != null && !restArg.startsWith('_') ? restArg : null;
   return SassCallableInfo(
       callable.name,

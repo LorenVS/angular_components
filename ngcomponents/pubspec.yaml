@@ -1,6 +1,6 @@
 name: ngcomponents
 version: 3.0.0-dev.1
-description: Angular material components for AngularDart maintained by the community. 
+description: Angular material components for AngularDart maintained by the community.
 repository: https://github.com/angulardart-community/angular_components
 
 environment:
@@ -19,14 +19,22 @@ dependencies:
   js: ^0.6.1
   logging: ^1.0.2
   meta: ^1.0.4
-  observable: ^0.24.0
   protobuf: ^2.0.0
   quiver: ^3.0.1
   sass_builder: ^2.0.2
+  observable: ^0.24.0
 
 dev_dependencies:
   grinder: ^0.9.0
   lints: ^2.0.0
   path: ^1.6.1
   test: ^1.0.0
-  build_runner: ^2.1.4
+  build_runner:
+
+# observable transitively depends on dart_internal, and no published
+# dart_internal version both supports null safety and declares
+# compatibility with recent Dart SDKs (the newest, 0.2.17, caps at
+# `<3.13.0`). See tool/dart_internal_override/pubspec.yaml for details.
+dependency_overrides:
+  dart_internal:
+    path: ../tool/dart_internal_override

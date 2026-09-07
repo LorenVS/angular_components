@@ -1,0 +1,16 @@
+name: build_modules
+publish_to: none
+description: >
+  Empty stand-in for package:build_modules.
+
+  ngdart depends on build_modules only as an unused pubspec dependency (no
+  code in this repo's dependency graph imports it). The real build_modules
+  package ships a build.yaml with a `module_library` builder that
+  auto-applies to every package and produces the same output
+  (`.module.library`) as the equivalent builder now bundled inside
+  build_web_compilers, which causes build_runner to fail with "Conflicting
+  outputs". This override replaces build_modules with a package that has no
+  build.yaml at all, removing the duplicate builder from the build.
+
+environment:
+  sdk: '>=2.17.0 <3.0.0'

@@ -1,0 +1,23 @@
+name: dart_internal
+publish_to: none
+description: >
+  Vendored copy of package:dart_internal 0.2.17, with the sdk upper bound
+  relaxed.
+
+  The upstream package caps its sdk constraint at `<3.13.0` (one patch
+  version behind what this repo is developed against) purely as a
+  conservative default: "Restrict the upper bound so that we can remove
+  support for this in a later version of the SDK without it being a
+  breaking change." Its actual code (lib/extract_type_arguments.dart,
+  lib/isolate_group.dart) is an unchanged thin shim over dart:_internal
+  and hasn't needed updates across the 0.2.14-0.2.17 range, so it is
+  vendored here verbatim with only the sdk constraint widened. observable
+  (and therefore ngcomponents) depends on this transitively; without this
+  override, `dart pub get` fails outright on newer Dart SDKs since no
+  published dart_internal version is null-safe *and* supports them.
+
+  If a future Dart SDK actually breaks dart:_internal's shape, this stops
+  working and needs re-vendoring from the newest upstream release.
+
+environment:
+  sdk: '>=3.5.0 <4.0.0'

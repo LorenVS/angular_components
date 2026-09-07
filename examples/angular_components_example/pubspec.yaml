@@ -12,7 +12,7 @@ dependencies:
     path: ../../angular_gallery
   app_layout_example:
     path: ../app_layout_example
-  build_config: ^1.0.0
+  build_config:
   material_button_example:
     path: ../material_button_example
   material_card_example:
@@ -65,7 +65,24 @@ dependencies:
     path: ../scorecard_example
 
 dev_dependencies:
-  build_runner: ^2.1.4
-  build_web_compilers: ^3.2.1
+  build_runner: ^2.4.0
+  build_web_compilers: ^4.5.0
 
-    
+# ngdart depends on build_modules as an unused pubspec dependency. Real
+# build_modules ships a `module_library` builder that collides with the
+# equivalent builder now bundled inside build_web_compilers (both auto-apply
+# to every package and emit the same `.module.library` output), which makes
+# build_runner fail with "Conflicting outputs". Nothing in this repo's
+# dependency graph imports package:build_modules, so it's safe to replace it
+# with an empty stand-in that has no build.yaml.
+#
+# observable (a dependency of ngcomponents) transitively depends on
+# dart_internal, and no published dart_internal version both supports null
+# safety and declares compatibility with recent Dart SDKs (the newest,
+# 0.2.17, caps at `<3.13.0`). See
+# tool/dart_internal_override/pubspec.yaml for details.
+dependency_overrides:
+  build_modules:
+    path: ../../tool/build_modules_stub
+  dart_internal:
+    path: ../../tool/dart_internal_override
